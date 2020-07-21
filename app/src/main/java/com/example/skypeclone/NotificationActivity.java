@@ -189,7 +189,7 @@ public class NotificationActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            contactRef.child(currentUserid).child(currentUserid).child("Contact").setValue("Saved")
+                            contactRef.child(listUserid).child(currentUserid).child("Contact").setValue("Saved")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
