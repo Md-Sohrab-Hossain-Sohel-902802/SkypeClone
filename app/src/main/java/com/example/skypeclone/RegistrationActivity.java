@@ -48,25 +48,10 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-        mAuth.signInWithEmailAndPassword("khorshed@gmail.com", "244739").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(RegistrationActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(RegistrationActivity.this, ContactsActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
 
 
 
-
-
-
-     /*   loadingBar=new ProgressDialog(RegistrationActivity.this);
+ loadingBar=new ProgressDialog(RegistrationActivity.this);
 
         phoneText=findViewById(R.id.phoneText);
         codeText=findViewById(R.id.codeText);
@@ -188,7 +173,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
 
-*/
+
 
 
     }

@@ -49,6 +49,10 @@ public class ContactsActivity extends AppCompatActivity {
     private String currentUserid;
 
 
+    private  String calldedBy="";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +129,8 @@ public class ContactsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        checkForReceavingCall();
+
         validateUser();
 
         FirebaseRecyclerOptions<Contacts> options = new FirebaseRecyclerOptions.Builder<Contacts>()
@@ -188,6 +194,7 @@ public class ContactsActivity extends AppCompatActivity {
 
 
 
+
     public static class ContactsViewHolder extends RecyclerView.ViewHolder {
 
 
@@ -237,6 +244,33 @@ public class ContactsActivity extends AppCompatActivity {
 
 
     }
+
+
+    private void checkForReceavingCall() {
+        userRef.child(currentUserid)
+                .child("Ringing")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.hasChild("ringing")){
+                            calldedBy=snapshot.child("ringing").getValue().toString();
+                            Intent intent=new Intent(ContactsActivity.this,CallingActivity.class);
+                            intent.putExtra("uid",calldedBy);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+    }
+
+
 
 
 }
